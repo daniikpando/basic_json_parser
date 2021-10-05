@@ -1,22 +1,37 @@
-# HtmlListParser
+# JSON to HTML'S LIST
 
-**TODO: Add description**
+## Use 
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `html_list_parser` to your list of dependencies in `mix.exs`:
+Use the main function something like that
 
 ```elixir
-def deps do
-  [
-    {:html_list_parser, "~> 0.1.0"}
-  ]
-end
+alias HtmlListParser
+
+json_list = [
+      %{"text" => "One", "indent" => 0, "type" => "ordered"},
+      %{"text" => "Two", "indent" => 0, "type" => "ordered"},
+      %{"text" => "Alpha", "indent" => 1, "type" => "bullet"},
+      %{"text" => "Beta", "indent" => 1, "type" => "bullet"},
+      %{"text" => "I", "indent" => 2, "type" => "ordered"},
+      %{"text" => "II", "indent" => 2, "type" => "ordered"},
+      %{"text" => "Three", "indent" => 0, "type" => "ordered"}
+    ]
+
+HtmlListParser.convert_json_to_html(json_list)
+>> "
+<ol> 
+  <li>One  </li>
+  <li>Two  
+    <ul> 
+      <li>Alpha  </li>
+      <li>Beta  
+        <ol>
+          <li>I  </li>
+          <li>II  </li> 
+        </ol> 
+      </li> 
+    </ul>
+  </li>
+  <li>Three  </li> 
+</ol>"
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/html_list_parser](https://hexdocs.pm/html_list_parser).
-
-# basic_json_parser
